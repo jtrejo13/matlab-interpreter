@@ -1,0 +1,8 @@
+__pycache__
+.coverage
+.DS_Store
+.pylintrc
+*.pyc
+Icon?
+RunInterpreter.tmp
+TestInterpreter.tmp
