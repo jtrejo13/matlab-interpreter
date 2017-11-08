@@ -14,8 +14,8 @@ from Parser import Parser
 # ------------
 
 
-def interp_read(input: str):
-    return Parser(Scanner(input))
+def interp_read(line: str):
+    return Parser(Scanner(line))
 
 
 # ------------

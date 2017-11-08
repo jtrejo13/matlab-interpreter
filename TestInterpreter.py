@@ -9,10 +9,18 @@ Github:    https://github.com/jtrejo13
 # imports
 # -------
 
-from io import StringIO
 from unittest import main, TestCase
+from Scanner import *
 
-# from Interpreter import
+
+# -----------
+# TestScanner
+# -----------
+
+class TestScanner(TestCase):
+    def test_token_construct(self):
+        token = Token(INTEGER, 4)
+        self.assertEqual("Token(INTEGER, 4)", token.__str__())
 
 
 # -----------
@@ -20,7 +28,8 @@ from unittest import main, TestCase
 # -----------
 
 class TestInterpreter(TestCase):
-    pass
+    def test_1(self):
+        self.assertEqual(True, True)
 
 
 # ----
