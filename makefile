@@ -5,14 +5,15 @@ FILES1 :=               \
     RunInterpreter      \
     TestInterpreter
 
-FILES2 :=           \
+FILES2 :=               \
     Interpreter.html    \
     Interpreter.log     \
     Interpreter.py      \
     RunInterpreter.in   \
     RunInterpreter.out  \
     RunInterpreter.py   \
-    TestInterpreter.py
+    TestInterpreter.py  \
+    .travis.yml  
 
 ifeq ($(shell uname), Darwin)          # Apple
     PYTHON   := python3
