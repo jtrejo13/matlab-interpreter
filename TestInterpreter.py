@@ -1,16 +1,15 @@
-# TestInterpreter
-# 
-# Filename: TestInterpreter.py
-# Description:
-# Author:    Juan Trejo
-# Github:    https://github.com/jtrejo13
-
+"""
+Filename: TestInterpreter.py
+Description:
+Author:    Juan Trejo
+Github:    https://github.com/jtrejo13
+"""
 
 # -------
 # imports
 # -------
 
-from io       import StringIO
+from io import StringIO
 from unittest import main, TestCase
 
 # from Interpreter import
@@ -20,13 +19,13 @@ from unittest import main, TestCase
 # TestInterpreter
 # -----------
 
-class TestInterpreter (TestCase) :
-	pass
+class TestInterpreter(TestCase):
+    pass
 
 
 # ----
 # main
 # ----
 
-if __name__ == "__main__" : #pragma: no cover
+if __name__ == "__main__":  # pragma: no cover
     main()
