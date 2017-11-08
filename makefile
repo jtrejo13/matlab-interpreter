@@ -107,6 +107,13 @@ status:
 		git remote -v
 		git status
 
+travis: Interpreter.html Interpreter.log
+		make clean
+		ls -al
+		make run
+		ls -al
+		make -r check
+
 versions:
 	which cmake
 	cmake --version
