@@ -24,7 +24,7 @@ ifeq ($(shell uname), Darwin)          # Apple
     PYDOC    := pydoc
     AUTOPEP8 := autopep8
 else ifeq ($(CI), true)                # Travis CI
-    PYTHON   := python3.5
+    PYTHON   := python3.5.3
     PIP      := pip
     MYPY     := mypy
     PYLINT   := pylint
