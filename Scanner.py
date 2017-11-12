@@ -11,9 +11,11 @@ Token types
 EOF (end-of-file) token is used to indicate that
 there is no more input left for lexical analysis
 """
-INTEGER, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN, EOF = (
-    'INTEGER', 'PLUS', 'MINUS', 'MUL', 'DIV', 'LPAREN', 'RPAREN', 'EOF'
+ID, INTEGER, ASSIGN, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN, SEMI, EOF = (
+    'ID', 'INTEGER', 'ASSIGN', 'PLUS', 'MINUS', 'MUL', 'DIV', 'LPAREN', 'RPAREN', 'SEMI', 'EOF'
 )
+
+RESERVED_KEYWORDS = {}
 
 
 class Token(object):
@@ -76,6 +78,17 @@ class Scanner(object):
                 self.advance()
                 return Token(RPAREN, ')')
 
+            if self.current_char.isalnum():
+                return self._id()
+
+            if self.current_char is '=':
+                self.advance()
+                return Token(ASSIGN, '=')
+
+            if self.current_char is ';':
+                self.advance()
+                return Token(SEMI, ';')
+
             self.raise_error()
 
         return Token(EOF, None)
@@ -86,6 +99,13 @@ class Scanner(object):
             self.current_char = None
         else:
             self.current_char = self.text[self.pos]
+
+    def peek(self):
+        peek_pos = self.pos + 1
+        if peek_pos > len(self.text) - 1:
+            return None
+        else:
+            return self.text[peek_pos]
 
     def skip_whitespace(self):
         while self.current_char is not None \
@@ -98,6 +118,15 @@ class Scanner(object):
                 and self.current_char.isdigit():
             self.advance()
         return self.text[start:self.pos]
+
+    def _id(self):
+        start = self.pos
+        while self.current_char is not None \
+        and self.current_char.isalnum():
+            self.advance()
+        
+        result = self.text[start:self.pos]
+        return RESERVED_KEYWORDS.get(result, Token(ID, result))
 
     def raise_error(self):
         raise Exception('Invalid character')
