@@ -45,7 +45,7 @@ class Scanner(object):
     def next_token(self):
         while self.current_char is not None:
 
-            if self.current_char is ' ':
+            if self.current_char.isspace():
                 self.skip_whitespace()
                 if self.current_char is None:
                     break
@@ -54,38 +54,40 @@ class Scanner(object):
                 num = self.get_integer()
                 return Token(INTEGER, num)
 
-            if self.current_char is '+':
+             if self.current_char == '%':
+
+            if self.current_char == '+':
                 self.advance()
                 return Token(PLUS, '+')
 
-            if self.current_char is '-':
+            if self.current_char == '-':
                 self.advance()
                 return Token(MINUS, '-')
 
-            if self.current_char is '*':
+            if self.current_char == '*':
                 self.advance()
                 return Token(MUL, '*')
 
-            if self.current_char is '/':
+            if self.current_char == '/':
                 self.advance()
                 return Token(DIV, '/')
 
-            if self.current_char is '(':
+            if self.current_char == '(':
                 self.advance()
                 return Token(LPAREN, '(')
 
-            if self.current_char is ')':
+            if self.current_char == ')':
                 self.advance()
                 return Token(RPAREN, ')')
 
             if self.current_char.isalnum():
                 return self._id()
 
-            if self.current_char is '=':
+            if self.current_char == '=':
                 self.advance()
                 return Token(ASSIGN, '=')
 
-            if self.current_char is ';':
+            if self.current_char == ';':
                 self.advance()
                 return Token(SEMI, ';')
 
@@ -109,7 +111,7 @@ class Scanner(object):
 
     def skip_whitespace(self):
         while self.current_char is not None \
-                and self.current_char is ' ':
+                and self.current_char.isspace():
             self.advance()
 
     def get_integer(self):
@@ -117,14 +119,14 @@ class Scanner(object):
         while self.current_char is not None \
                 and self.current_char.isdigit():
             self.advance()
-        return self.text[start:self.pos]
+        return int(self.text[start:self.pos])
 
     def _id(self):
         start = self.pos
         while self.current_char is not None \
-        and self.current_char.isalnum():
+                and self.current_char.isalnum():
             self.advance()
-        
+
         result = self.text[start:self.pos]
         return RESERVED_KEYWORDS.get(result, Token(ID, result))
 

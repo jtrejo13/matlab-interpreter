@@ -19,6 +19,12 @@ class Node(object):
         self.right = None
 
 
+class Compound(Node):
+    def __init__(self):
+        Node.__init__(self)
+        self.statements = []
+
+
 class BinaryOp(Node):
     def __init__(self, left, op, right):
         Node.__init__(self)
@@ -34,11 +40,24 @@ class UnaryOp(Node):
         self.token = self.op = op
 
 
+class Assign(Node):
+    def __init__(self, left, op, right):
+        Node.__init__(self)
+        self.left = left
+        self.token = self.op = op
+        self.right = right
+
+
+class Var(Node):
+    def __init__(self, token):
+        Node.__init__(self)
+        self.token = token
+
+
 class Num(Node):
     def __init__(self, token):
         Node.__init__(self)
         self.token = token
-        self.value = token.value
 
 
 class Parser(object):
@@ -48,17 +67,59 @@ class Parser(object):
         self.current_token = scanner.next_token()
 
     def parse(self):
-        return self.expr()
+        node = self.script()
+        if self.current_token.type != EOF:
+            self.raise_error()
+
+        return node
+
+    def script(self):
+        nodes = self.statement_list()
+
+        root = Compound()
+        for node in nodes:
+            root.statements.append(node)
+
+        return root
+
+    def statement_list(self):
+        node = self.statement()
+
+        statements = [node]
+
+        while self.current_token.type == SEMI:
+            self.eat(SEMI)
+            statements.append(self.statement())
+
+        if self.current_token.type == ID:
+            self.raise_error()
+
+        return statements
+
+    def statement(self):
+        if self.current_token.type == ID:
+            node = self.assignment_statement()
+        else:
+            node = Node()  # empty node
+        return node
+
+    def assignment_statement(self):
+        variable = self.variable()
+        token = self.current_token
+        self.eat(ASSIGN)
+        expr = self.expr()
+        node = Assign(variable, token, expr)
+        return node
 
     def expr(self):
         node = self.term()
 
-        while self.current_token.type is PLUS or \
-                self.current_token.type is MINUS:
+        while self.current_token.type == PLUS or \
+                self.current_token.type == MINUS:
             token = self.current_token
-            if token.type is PLUS:
+            if token.type == PLUS:
                 self.eat(PLUS)
-            elif token.type is MINUS:
+            elif token.type == MINUS:
                 self.eat(MINUS)
             node = BinaryOp(node, token, self.term())
         return node
@@ -66,12 +127,12 @@ class Parser(object):
     def term(self):
         node = self.factor()
 
-        while self.current_token.type is MUL or \
-                self.current_token.type is DIV:
+        while self.current_token.type == MUL or \
+                self.current_token.type == DIV:
             token = self.current_token
-            if self.current_token.type is MUL:
+            if self.current_token.type == MUL:
                 self.eat(MUL)
-            elif self.current_token.type is DIV:
+            elif self.current_token.type == DIV:
                 self.eat(DIV)
             node = BinaryOp(node, token, self.factor())
         return node
@@ -84,16 +145,23 @@ class Parser(object):
         elif token.type == MINUS:
             self.eat(MINUS)
             return UnaryOp(token, self.factor())
+        elif token.type == INTEGER:
+            self.eat(INTEGER)
+            return Num(token)
+        elif token.type == LPAREN:
+            self.eat(LPAREN)
+            node = self.expr()
+            self.eat(RPAREN)
+            return node
         else:
-            if token.type == INTEGER:
-                self.eat(INTEGER)
-                return Num(token)
-            elif token.type == LPAREN:
-                self.eat(LPAREN)
-                node = self.expr()
-                self.eat(RPAREN)
-                return node
+            node = self.variable()
+            return node
         self.raise_error()
+
+    def variable(self):
+        node = Var(self.current_token)
+        self.eat(ID)
+        return node
 
     def eat(self, token_type):
         if token_type == self.current_token.type:

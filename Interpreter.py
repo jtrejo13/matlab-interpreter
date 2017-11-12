@@ -1,6 +1,3 @@
-# pylint: disable = bad-whitespace
-# pylint: disable = missing-docstring
-
 """
 Filename: Interpreter.py
 Description:
@@ -28,37 +25,58 @@ class NodeVisitor(object):
 
 
 class Interpreter(NodeVisitor):
+
     def __init__(self, parser):
         self.parser = parser
+        self.GLOBAL_SCOPE = {}   # variable_name : value
 
     def interpret(self):
         tree = self.parser.parse()
         return self.visit(tree)
 
+    def visit_Compound(self, node):
+        for statement in node.statements:
+            self.visit(statement)
+
+    def visit_Assign(self, node):
+        var_name = node.left.token.value
+        self.GLOBAL_SCOPE[var_name] = self.visit(node.right)
+
+    def visit_Node(self, node):
+        pass
+
     def visit_BinaryOp(self, node):
         token = node.token
-        if token.type is PLUS:
+        if token.type == PLUS:
             return self.visit(node.left) + self.visit(node.right)
-        if token.type is MINUS:
+        if token.type == MINUS:
             return self.visit(node.left) - self.visit(node.right)
-        if token.type is MUL:
+        if token.type == MUL:
             return self.visit(node.left) * self.visit(node.right)
-        if token.type is DIV:
+        if token.type == DIV:
             return self.visit(node.left) / self.visit(node.right)
         self.raise_error()
 
     def visit_UnaryOp(self, node):
         token = node.token
-        if token.type is PLUS:
+        if token.type == PLUS:
             return self.visit(node.right)
-        if token.type is MINUS:
+        if token.type == MINUS:
             return -1 * self.visit(node.right)
         self.raise_error()
 
+    def visit_Var(self, node):
+        var_name = node.token.value
+        value = self.GLOBAL_SCOPE.get(var_name)
+        if value is None:
+            raise NameError(repr(token.value))
+        else:
+            return value
+            
     def visit_Num(self, node):
         token = node.token
-        if token.type is INTEGER:
-            return int(token.value)
+        if token.type == INTEGER:
+            return token.value
 
     def raise_error(self):
         raise Exception('Error parsing input')
@@ -69,12 +87,11 @@ class Interpreter(NodeVisitor):
 # ------------
 
 def interp_read(line: str):
-    return Parser(Scanner(line.rstrip()))
+    return Parser(Scanner(line))
 
 # ------------
 # interp_eval
 # ------------
-
 
 def interp_eval(parser: Parser):
     interp = Interpreter(parser)
@@ -85,14 +102,12 @@ def interp_eval(parser: Parser):
 # interp_print
 # ------------
 
-
 def interp_print(writer: IO[str], result: str):
-    writer.write(str(result) + "\n")
+    writer.write(str(result) + '\n')
 
 # ------------
 # interp_solve
 # ------------
-
 
 def interp_solve(reader: IO[str], writer: IO[str]):
     """
