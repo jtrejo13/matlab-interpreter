@@ -91,6 +91,8 @@ docker:
 
 format:
 		$(AUTOPEP8) -i Interpreter.py
+		$(AUTOPEP8) -i Scanner.py
+		$(AUTOPEP8) -i Parser.py
 		$(AUTOPEP8) -i RunInterpreter.py
 		$(AUTOPEP8) -i TestInterpreter.py
 

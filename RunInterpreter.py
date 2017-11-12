@@ -10,7 +10,6 @@ Github:    https://github.com/jtrejo13
 # -------
 
 from sys import stdin, stdout
-
 from Interpreter import interp_solve
 
 # ----
