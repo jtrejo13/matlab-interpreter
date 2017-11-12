@@ -10,7 +10,7 @@ Github:    https://github.com/jtrejo13
 # -------
 
 from unittest import main, TestCase
-from Scanner import Token, Scanner, INTEGER, PLUS, EOF
+from Scanner import Token, Scanner, INTEGER, PLUS
 from Parser import *
 from Interpreter import Interpreter
 
@@ -63,14 +63,12 @@ class TestScanner(TestCase):
 
     def test_scanner_next_token_3(self):
         scanner = Scanner('-5*(3/2)')
-        self.assertEqual('Token(MINUS, -)', str(scanner.next_token()))
-        self.assertEqual('Token(INTEGER, 5)', str(scanner.next_token()))
-        self.assertEqual('Token(MUL, *)', str(scanner.next_token()))
-        self.assertEqual('Token(LPAREN, ()', str(scanner.next_token()))
-        self.assertEqual('Token(INTEGER, 3)', str(scanner.next_token()))
-        self.assertEqual('Token(DIV, /)', str(scanner.next_token()))
-        self.assertEqual('Token(INTEGER, 2)', str(scanner.next_token()))
-        self.assertEqual('Token(RPAREN, ))', str(scanner.next_token()))
+        result_tokens = []
+        for _ in range(0,9):
+            result_tokens.append(scanner.next_token())
+        
+        expected = '[Token(MINUS, -), Token(INTEGER, 5), Token(MUL, *), Token(LPAREN, (), Token(INTEGER, 3), Token(DIV, /), Token(INTEGER, 2), Token(RPAREN, )), Token(EOF, None)]'
+        self.assertEqual(expected, str(result_tokens))
 
     def test_scanner_next_token_4(self):
         scanner = Scanner('1 ')
@@ -86,6 +84,15 @@ class TestScanner(TestCase):
         scanner = Scanner('~')
         with self.assertRaises(Exception) as _:
             scanner.next_token()
+
+    def test_scanner_next_token_7(self):
+        scanner = Scanner('myVar = 2;')
+        result_tokens = []
+        for _ in range(0,5):
+            result_tokens.append(scanner.next_token())
+        
+        expected = '[Token(ID, myVar), Token(ASSIGN, =), Token(INTEGER, 2), Token(SEMI, ;), Token(EOF, None)]'
+        self.assertEqual(expected, str(result_tokens))
 
 # ----------
 # TestParser
