@@ -21,7 +21,7 @@ ifeq ($(shell uname), Darwin)          # Apple
     PYLINT   := pylint
     MYPY     := mypy
     COVERAGE := coverage
-    PYDOC    := pydoc
+    PYDOC    := pydoc3
     AUTOPEP8 := autopep8
 else ifeq ($(CI), true)                # Travis CI
     PYTHON   := python3.5

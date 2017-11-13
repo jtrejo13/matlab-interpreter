@@ -11,8 +11,8 @@ Token types
 EOF (end-of-file) token is used to indicate that
 there is no more input left for lexical analysis
 """
-ID, INTEGER, ASSIGN, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN, SEMI, EOF = (
-    'ID', 'INTEGER', 'ASSIGN', 'PLUS', 'MINUS', 'MUL', 'DIV', 'LPAREN', 'RPAREN', 'SEMI', 'EOF'
+ID, INTEGER, FLOAT, ASSIGN, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN, SEMI, EOF = (
+    'ID', 'INTEGER', 'FLOAT', 'ASSIGN', 'PLUS', 'MINUS', 'MUL', 'DIV', 'LPAREN', 'RPAREN', 'SEMI', 'EOF'
 )
 
 RESERVED_KEYWORDS = {}
@@ -54,8 +54,8 @@ class Scanner(object):
                 continue
 
             if self.current_char.isdigit():
-                num = self.get_integer()
-                return Token(INTEGER, num)
+                token = self.get_number()
+                return token
 
             if self.current_char == '+':
                 self.advance()
@@ -96,12 +96,19 @@ class Scanner(object):
 
         return Token(EOF, None)
 
-    def get_integer(self):
+    def get_number(self):
         start = self.pos
         while self.current_char is not None \
-                and self.current_char.isdigit():
+                and (self.current_char.isdigit() or self.current_char == '.'):
             self.advance()
-        return int(self.text[start:self.pos])
+        result = self.text[start:self.pos]
+        period_count = result.count('.')
+        if period_count > 1:
+            self.raise_error()
+        elif period_count == 1:
+            return Token(FLOAT, float(result))
+        else:
+            return Token(INTEGER, int(result))
 
     def _id(self):
         start = self.pos

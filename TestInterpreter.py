@@ -98,6 +98,15 @@ class TestScanner(TestCase):
         expected = ('[Token(ID, myVar), Token(ASSIGN, =), Token(INTEGER, 2),' ' Token(SEMI, ;), Token(EOF, None)]')
         self.assertEqual(expected, str(result_tokens))
 
+    def test_scanner_next_token_9(self):
+        scanner = Scanner('2.5')
+        self.assertEqual('Token(FLOAT, 2.5)', str(scanner.next_token()))
+
+    def test_scanner_next_token_10(self):
+        scanner = Scanner('2.5.0')
+        with self.assertRaises(Exception) as _:
+            scanner.next_token()
+
 # ----------
 # TestParser
 # ----------
@@ -255,7 +264,7 @@ class TestInterpreter(TestCase):
         script = """a = +-1;
                     x = 5;          % this is x
                     y = x + 3;      % this is y
-                    
+
                     % The result 
                     res = y + 3 * ((y + 2)/(12 / (3 + 1) - 1)) * ((y+2) * x) - x;"""
         scanner = Scanner(script)
