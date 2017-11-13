@@ -133,7 +133,7 @@ class TestParser(TestCase):
         self.assertEqual(get_expr(statement), 'res=1+2*3-45+2*14/7')
 
     def test_parser_parse_4(self):
-        scanner = Scanner('invalid = 3%2')
+        scanner = Scanner('invalid = 3~2')
         parser = Parser(scanner)
         with self.assertRaises(Exception) as _:
             tree = parser.parse()
@@ -219,10 +219,10 @@ class TestInterpreter(TestCase):
         self.assertEqual('{\'res\': 753.0}', str(interp.GLOBAL_SCOPE))
 
     def test_interp_express_3(self):
-        script = ('a = +-1; \n'
-            'x = 5;\n'
-            ' y = x + 3; \n'
-            'res = y + 3 * ((y + 2)/(12 / (3 + 1) - 1)) * ((y+2) * x) - x;\n')
+        script = """a = +-1;
+                    x = 5;
+                    y = x + 3;
+                    res = y + 3 * ((y + 2)/(12 / (3 + 1) - 1)) * ((y+2) * x) - x;"""
         scanner = Scanner(script)
         parser = Parser(scanner)
         interp = Interpreter(parser)
@@ -230,17 +230,41 @@ class TestInterpreter(TestCase):
         result = {'a': -1, 'x': 5, 'y': 8, 'res': 753.0}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
 
-#     def test_interp_express_1(self):
-#         scanner = Scanner('-+--1')
-#         parser = Parser(scanner)
-#         interp = Interpreter(parser)
-#         self.assertEqual(interp.interpret(), -1)
 
-#     def test_interp_express_2(self):
-#         scanner = Scanner('1 + 1')
-#         parser = Parser(scanner)
-#         interp = Interpreter(parser)
-#         self.assertEqual(interp.interpret(), 2)
+    def test_interp_express_4(self):
+        script = '  % this is a variable \n  '
+        scanner = Scanner(script)
+        parser = Parser(scanner)
+        interp = Interpreter(parser)
+        interp.interpret()
+        result = {}
+        self.assertEqual(result, interp.GLOBAL_SCOPE)
+
+
+    def test_interp_express_5(self):
+        script = 'x = 5;  % this is a variable \n  '
+        scanner = Scanner(script)
+        parser = Parser(scanner)
+        interp = Interpreter(parser)
+        interp.interpret()
+        result = {'x': 5}
+        self.assertEqual(result, interp.GLOBAL_SCOPE)
+
+
+    def test_interp_express_6(self):
+        script = """a = +-1;
+                    x = 5;          % this is x
+                    y = x + 3;      % this is y
+                    
+                    % The result 
+                    res = y + 3 * ((y + 2)/(12 / (3 + 1) - 1)) * ((y+2) * x) - x;"""
+        scanner = Scanner(script)
+        parser = Parser(scanner)
+        interp = Interpreter(parser)
+        interp.interpret()
+        result = {'a': -1, 'x': 5, 'y': 8, 'res': 753.0}
+        self.assertEqual(result, interp.GLOBAL_SCOPE)
+
 
 #     def test_interp_express_3(self):
 #         scanner = Scanner('14 + 2 * 3 - 6 / 2 + 10')

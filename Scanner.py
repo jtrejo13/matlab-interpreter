@@ -45,16 +45,17 @@ class Scanner(object):
     def next_token(self):
         while self.current_char is not None:
 
+            if self.current_char == '%':
+                self.skip_comment()
+                continue
+
             if self.current_char.isspace():
                 self.skip_whitespace()
-                if self.current_char is None:
-                    break
+                continue
 
             if self.current_char.isdigit():
                 num = self.get_integer()
                 return Token(INTEGER, num)
-
-             if self.current_char == '%':
 
             if self.current_char == '+':
                 self.advance()
@@ -91,28 +92,9 @@ class Scanner(object):
                 self.advance()
                 return Token(SEMI, ';')
 
-            self.raise_error()
+            self.raise_error()  # if invalid character 
 
         return Token(EOF, None)
-
-    def advance(self):
-        self.pos += 1
-        if self.pos > len(self.text) - 1:
-            self.current_char = None
-        else:
-            self.current_char = self.text[self.pos]
-
-    def peek(self):
-        peek_pos = self.pos + 1
-        if peek_pos > len(self.text) - 1:
-            return None
-        else:
-            return self.text[peek_pos]
-
-    def skip_whitespace(self):
-        while self.current_char is not None \
-                and self.current_char.isspace():
-            self.advance()
 
     def get_integer(self):
         start = self.pos
@@ -129,6 +111,30 @@ class Scanner(object):
 
         result = self.text[start:self.pos]
         return RESERVED_KEYWORDS.get(result, Token(ID, result))
+
+    def advance(self):
+        self.pos += 1
+        if self.pos > len(self.text) - 1:
+            self.current_char = None
+        else:
+            self.current_char = self.text[self.pos]
+
+    def peek(self):
+        peek_pos = self.pos + 1
+        if peek_pos > len(self.text) - 1:
+            return None
+        else:
+            return self.text[peek_pos]
+
+    def skip_comment(self):
+        while self.current_char is not None \
+            and self.current_char != '\n':
+            self.advance()
+
+    def skip_whitespace(self):
+        while self.current_char is not None \
+                and self.current_char.isspace():
+            self.advance()
 
     def raise_error(self):
         raise Exception('Invalid character')
