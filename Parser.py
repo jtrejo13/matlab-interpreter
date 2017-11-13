@@ -1,6 +1,6 @@
 """
 Filename: Parser.py
-Description: Tokenizer or Scanner to break input into valid MATLAB tokens
+Description: Parser of the MATLAB language
 Author:    Juan Trejo
 Github:    https://github.com/jtrejo13
 """
@@ -13,6 +13,8 @@ from Scanner import *
 
 
 class Node(object):
+    """Base class representing a binary tree node"""
+
     def __init__(self):
         self.left = None
         self.token = None
@@ -20,12 +22,31 @@ class Node(object):
 
 
 class Compound(Node):
+    """
+    Node sub-class to represent a Compound element in a MATLAB 
+    Abstract Syntax Tree. In this implementation the Compound
+    element is the whole script
+
+    Attributes:
+        statements(list of Node): The statements included in the MATLAB script
+    """
+
     def __init__(self):
         Node.__init__(self)
         self.statements = []
 
 
 class BinaryOp(Node):
+    """
+    Node sub-class to represent a 'binary operation' in
+    a MATLAB Abstract Syntax Tree. Examples: 2 * 3 or 10 / 2
+
+    Attributes:
+    left(Node): The child Node on the left
+    right(Node): The child Node on the right
+    token(Token): A binary operator token.
+    """
+
     def __init__(self, left, op, right):
         Node.__init__(self)
         self.left = left
@@ -34,39 +55,93 @@ class BinaryOp(Node):
 
 
 class UnaryOp(Node):
+    """
+    Node sub-class to represent a 'unary operation' in 
+    a MATLAB Abstract Syntax Tree. Examples: --1 or -(+2)
+
+    Attributes:
+    right(Node): The child Node on the right
+    token(Token): A unary operator token
+    """
+
     def __init__(self, op, right):
         Node.__init__(self)
         self.right = right
-        self.token = self.op = op
+        self.token = op
 
 
 class Assign(Node):
+    """
+    Node sub-class to represent an 'assignment' in 
+    a MATLAB Abstract Syntax Tree. Examples: x = 2, myVar = 2 * 3 + 5
+
+    Attributes:
+    left(Var): The child Var on the left
+    right(Node): The child Node on the right
+    token(Token): An assignment token
+    """
+
     def __init__(self, left, op, right):
         Node.__init__(self)
         self.left = left
-        self.token = self.op = op
+        self.token = op
         self.right = right
 
 
 class Var(Node):
+    """
+    Node sub-class to represent a 'variable' or 'identifier' 
+    in a MATLAB Abstract Syntax Tree. Examples: myVar, PI, area
+
+    Attributes:
+    token(Token): An ID token
+    """
+
     def __init__(self, token):
         Node.__init__(self)
         self.token = token
 
 
 class Num(Node):
+    """
+    Node sub-class to represent a positive numer in
+    a MATLAB Abstract Syntax Tree. Examples: 3.14159, 10
+
+    Attributes:
+    token(Token): A FLOAT or INTEGER token
+    """
+
     def __init__(self, token):
         Node.__init__(self)
         self.token = token
 
 
 class Parser(object):
+    """
+    A class to parse a series of tokens representing the MATLAB language
+
+    Args:
+        scanner(Scanner): A scanner object constructed with the text input to be parsed
+
+    Attributes:
+        scanner(Scanner): A scanner object constructed with the text input to be parsed
+        current_token(Token): The current token being analyzed by the parser
+    """
 
     def __init__(self, scanner):
         self.scanner = scanner
         self.current_token = scanner.next_token()
 
     def parse(self):
+        """
+        Parses the text input passed via the scanner
+
+        Returns:
+            Node: An Abstract Syntax Tree (AST) representing the input passed
+
+        Raises:
+            Exception: If invalid syntax is encountered
+        """
         node = self.script()
         if self.current_token.type != EOF:
             self.raise_error()
@@ -167,15 +242,21 @@ class Parser(object):
         return node
 
     def eat(self, token_type):
+        """Advances parser by a single token"""
         if token_type == self.current_token.type:
             self.current_token = self.scanner.next_token()
         else:
             self.raise_error()
 
     def raise_error(self):
+        """
+        Raises:
+            Exception: Invalid sytax error
+        """
         raise Exception('Invalid syntax error.')
 
 
+"""
 def print_tree(tree, indent=3):
     if tree.right:
         print_tree(tree.right, indent + 4)
@@ -184,15 +265,32 @@ def print_tree(tree, indent=3):
     if tree.left:
         print(indent * ' ' + '  \\')
         print_tree(tree.left, indent + 4)
+"""
 
 
 def get_expr(tree):
-    l = []
-    print_expr_recurs(tree, l)
-    return ''.join(str(i) for i in l)
+    """
+    Converts an AST back into the original 'linear' expression.
+
+    Args:
+        tree(Node): The root of an AST to be 'linearized'
+
+    Returns:
+        str: String representation of expression
+
+    Examples:
+        parser = Parser(Scanner('x = 2 + 5'))
+        myAST = parser.parse()
+        expression = get_expr(myAST)
+        expression == 'x=2+5'
+    """
+    elems = []
+    print_expr_recurs(tree, elems)
+    return ''.join(str(item) for item in elems)
 
 
 def print_expr_recurs(tree, output):
+    """Helper recursive function for print_expr"""
     if tree.left:
         print_expr_recurs(tree.left, output)
     if tree.right:

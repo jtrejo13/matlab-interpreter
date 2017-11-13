@@ -70,8 +70,8 @@ class TestScanner(TestCase):
             result_tokens.append(scanner.next_token())
 
         expected = ('[Token(MINUS, -), Token(INTEGER, 5), Token(MUL, *),'
-        ' Token(LPAREN, (), Token(INTEGER, 3), Token(DIV, /),'
-        ' Token(INTEGER, 2), Token(RPAREN, )), Token(EOF, None)]')
+                    ' Token(LPAREN, (), Token(INTEGER, 3), Token(DIV, /),'
+                    ' Token(INTEGER, 2), Token(RPAREN, )), Token(EOF, None)]')
         self.assertEqual(expected, str(result_tokens))
 
     def test_scanner_next_token_4(self):
@@ -95,7 +95,7 @@ class TestScanner(TestCase):
         for _ in range(0, 5):
             result_tokens.append(scanner.next_token())
 
-        expected = ('[Token(ID, myVar), Token(ASSIGN, =), Token(INTEGER, 2),' ' Token(SEMI, ;), Token(EOF, None)]')
+        expected = """[Token(ID, myVar), Token(ASSIGN, =), Token(INTEGER, 2), Token(SEMI, ;), Token(EOF, None)]"""
         self.assertEqual(expected, str(result_tokens))
 
     def test_scanner_next_token_9(self):
@@ -110,6 +110,7 @@ class TestScanner(TestCase):
 # ----------
 # TestParser
 # ----------
+
 
 class TestParser(TestCase):
 
@@ -145,7 +146,7 @@ class TestParser(TestCase):
         scanner = Scanner('invalid = 3~2')
         parser = Parser(scanner)
         with self.assertRaises(Exception) as _:
-            tree = parser.parse()
+            parser.parse()
 
     def test_parser_parse_5(self):
         scanner = Scanner('myInt = -+-1')
@@ -158,7 +159,7 @@ class TestParser(TestCase):
         scanner = Scanner('var = 3++')
         parser = Parser(scanner)
         with self.assertRaises(Exception) as _:
-            tree = parser.parse()
+            parser.parse()
 
     def test_parser_parse_7(self):
         scanner = Scanner('x = 3+2')
@@ -170,7 +171,7 @@ class TestParser(TestCase):
         scanner = Scanner('var')
         parser = Parser(scanner)
         with self.assertRaises(Exception) as _:
-            tree = parser.parse()
+            parser.parse()
 
     def test_parser_parse_9(self):
         scanner = Scanner('x = 3;\n y = 2;')
@@ -182,7 +183,7 @@ class TestParser(TestCase):
 
     def test_parser_parse_10(self):
         script = (' x1 = 1 + (2*3) - 45 + ( 2 * 14/7);  \n'
-        'y = ((2)*5)/5 + 15;')
+                  'y = ((2)*5)/5 + 15;')
         scanner = Scanner(script)
         parser = Parser(scanner)
         tree = parser.parse()
@@ -190,7 +191,7 @@ class TestParser(TestCase):
         self.assertEqual(get_expr(statements[0]), 'x1=1+2*3-45+2*14/7')
         self.assertEqual(get_expr(statements[1]), 'y=2*5/5+15')
 
-    def test_parser_parse_9(self):
+    def test_parser_parse_11(self):
         scanner = Scanner('x = 3;\n y = x;')
         parser = Parser(scanner)
         tree = parser.parse()
@@ -223,7 +224,8 @@ class TestInterpreter(TestCase):
         self.assertEqual(result, interp.GLOBAL_SCOPE)
 
     def test_interp_express_2(self):
-        scanner = Scanner('res = 8 + 3 * (10 / (12 / (3 + 1) - 1)) * ( 10 * 5) - 5;')
+        scanner = Scanner(
+            'res = 8 + 3 * (10 / (12 / (3 + 1) - 1)) * ( 10 * 5) - 5;')
         parser = Parser(scanner)
         interp = Interpreter(parser)
         interp.interpret()
@@ -242,7 +244,6 @@ class TestInterpreter(TestCase):
         result = {'a': -1, 'x': 5, 'y': 8, 'res': 753}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
 
-
     def test_interp_express_4(self):
         script = '  % this is a variable \n  '
         scanner = Scanner(script)
@@ -252,7 +253,6 @@ class TestInterpreter(TestCase):
         result = {}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
 
-
     def test_interp_express_5(self):
         script = 'x = 5;  % this is a variable \n  '
         scanner = Scanner(script)
@@ -261,7 +261,6 @@ class TestInterpreter(TestCase):
         interp.interpret()
         result = {'x': 5}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
-
 
     def test_interp_express_6(self):
         script = """a = +-1;
@@ -305,30 +304,10 @@ class TestInterpreter(TestCase):
         self.assertEqual(result, interp.GLOBAL_SCOPE)
 
 
-#     def test_interp_express_3(self):
-#         scanner = Scanner('14 + 2 * 3 - 6 / 2 + 10')
-#         parser = Parser(scanner)
-#         interp = Interpreter(parser)
-#         self.assertEqual(interp.interpret(), 27)
+# --------
+# TestREPL
+# --------
 
-#     def test_interp_express_4(self):
-#         scanner = Scanner(
-#             '8 + 3 * (10 / (12 / (3 + 1) - 1)) * ( 10 * 5) - 5')
-#         parser = Parser(scanner)
-#         interp = Interpreter(parser)
-#         self.assertEqual(interp.interpret(), 753)
-
-#     def test_interp_express_5(self):
-#         scanner = Scanner('7 + (((3 + 2)))')
-#         parser = Parser(scanner)
-#         interp = Interpreter(parser)
-#         self.assertEqual(interp.interpret(), 12)
-
-#     def test_interp_express_6(self):
-#         bad_tree = BinaryOp(Token(MUL, '*'), Token(MUL, '*'), 3)
-#         interp = Interpreter(bad_tree)
-#         with self.assertRaises(Exception) as _:
-#             interp.vist(bad_tree)
 
 # ----
 # main
