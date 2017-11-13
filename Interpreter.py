@@ -54,7 +54,11 @@ class Interpreter(NodeVisitor):
         if token.type == MUL:
             return self.visit(node.left) * self.visit(node.right)
         if token.type == DIV:
-            return self.visit(node.left) / self.visit(node.right)
+            result = self.visit(node.left) / self.visit(node.right)
+            if result.is_integer():
+                return int(result)
+            else:
+                return result
         self.raise_error()
 
     def visit_UnaryOp(self, node):
@@ -75,7 +79,7 @@ class Interpreter(NodeVisitor):
             
     def visit_Num(self, node):
         token = node.token
-        if token.type == INTEGER:
+        if token.type in (INTEGER, FLOAT):
             return token.value
 
     def raise_error(self):

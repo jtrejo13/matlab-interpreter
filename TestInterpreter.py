@@ -211,21 +211,24 @@ class TestInterpreter(TestCase):
         parser = Parser(scanner)
         interp = Interpreter(parser)
         interp.interpret()
-        self.assertEqual('{\'x\': 1}', str(interp.GLOBAL_SCOPE))
+        result = {'x': 1}
+        self.assertEqual(result, interp.GLOBAL_SCOPE)
 
     def test_interp_express_1(self):
         scanner = Scanner('res = 14 + 2 * 3 - 6 / 2 + 10;')
         parser = Parser(scanner)
         interp = Interpreter(parser)
         interp.interpret()
-        self.assertEqual('{\'res\': 27.0}', str(interp.GLOBAL_SCOPE))
+        result = {'res': 27}
+        self.assertEqual(result, interp.GLOBAL_SCOPE)
 
     def test_interp_express_2(self):
         scanner = Scanner('res = 8 + 3 * (10 / (12 / (3 + 1) - 1)) * ( 10 * 5) - 5;')
         parser = Parser(scanner)
         interp = Interpreter(parser)
         interp.interpret()
-        self.assertEqual('{\'res\': 753.0}', str(interp.GLOBAL_SCOPE))
+        result = {'res': 753}
+        self.assertEqual(result, interp.GLOBAL_SCOPE)
 
     def test_interp_express_3(self):
         script = """a = +-1;
@@ -236,7 +239,7 @@ class TestInterpreter(TestCase):
         parser = Parser(scanner)
         interp = Interpreter(parser)
         interp.interpret()
-        result = {'a': -1, 'x': 5, 'y': 8, 'res': 753.0}
+        result = {'a': -1, 'x': 5, 'y': 8, 'res': 753}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
 
 
@@ -271,7 +274,34 @@ class TestInterpreter(TestCase):
         parser = Parser(scanner)
         interp = Interpreter(parser)
         interp.interpret()
-        result = {'a': -1, 'x': 5, 'y': 8, 'res': 753.0}
+        result = {'a': -1, 'x': 5, 'y': 8, 'res': 753}
+        self.assertEqual(result, interp.GLOBAL_SCOPE)
+
+    def test_interp_express_7(self):
+        scanner = Scanner('x = 1.53;')
+        parser = Parser(scanner)
+        interp = Interpreter(parser)
+        interp.interpret()
+        result = {'x': 1.53}
+        self.assertEqual(result, interp.GLOBAL_SCOPE)
+
+    def test_interp_express_8(self):
+        scanner = Scanner('res = 14.75 + 2 * 3 - 6 / 2.5 + 10.5;')
+        parser = Parser(scanner)
+        interp = Interpreter(parser)
+        interp.interpret()
+        result = {'res': 28.85}
+        self.assertEqual(result, interp.GLOBAL_SCOPE)
+
+    def test_interp_express_9(self):
+        script = """radius = 2.5;                     % the radius
+                    PI = 3.14159;                     % PI constant
+                    area = PI * radius * radius;      % the area"""
+        scanner = Scanner(script)
+        parser = Parser(scanner)
+        interp = Interpreter(parser)
+        interp.interpret()
+        result = {'radius': 2.5, 'PI': 3.14159, 'area': 19.6349375}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
 
 

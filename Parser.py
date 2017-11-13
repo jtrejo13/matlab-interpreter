@@ -148,6 +148,9 @@ class Parser(object):
         elif token.type == INTEGER:
             self.eat(INTEGER)
             return Num(token)
+        elif token.type == FLOAT:
+            self.eat(FLOAT)
+            return Num(token)
         elif token.type == LPAREN:
             self.eat(LPAREN)
             node = self.expr()
