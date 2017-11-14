@@ -5,6 +5,14 @@
 
 A (simplified) MATLAB language interpreter. 
 
+## About
+
+This interpreter was written in Python and it directly executes instructions written in the MATLAB language. The interpreter uses the following strategies for program execution:
+
+1) Reads and 'tokenizes' the input source code
+2) Parses the tokenized source code and produces an Abstract Syntax Tree (AST)
+3) Traverses and interprets the AST, executing expressions as it moves along the tree
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
