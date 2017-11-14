@@ -63,29 +63,30 @@ Explain what these tests test and why
 Give an example
 ```
 
-## Deployment
 
-Add additional notes about how to deploy this on a live system
+## Tools
 
-## Built With
+* [Python 3](https://docs.python.org/3/) - The programming language
+* [Make](https://www.gnu.org/software/make/) - Automated builds
+* [Git](https://www.git-scm.com/) - Source control
+* [Pylint](https://www.pylint.org/) - Code static analysis
+* [unittest](https://docs.python.org/3.5/library/unittest.html) - Unit testing
+* [coverage](https://pypi.python.org/pypi/coverage) - Code coverage
+* [Pydoc](https://docs.python.org/2/library/pydoc.html) - Automated documentation
+* [autopep8](https://pypi.python.org/pypi/autopep8) - Automated formatting
+* [TravisCI](https://education.travis-ci.com/) - Continious integration
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+For the versions available, see the [tags on this repository](https://github.com/jtrejo13/matlab-interpreter/releases). 
 
-## Authors
+## Author
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Juan Trejo**
+[GitHub](https://github.com/jtrejo13)
+[LinkedIn](https://www.linkedin.com/in/jtrejo13/)
+[Home](https://jtrejo13.github.io/)
 
 ## License
 
@@ -93,6 +94,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* Inspired by [rspivak](https://github.com/rspivak) and his 'simple Pascal interpreter' [project](https://github.com/rspivak/lsbasi)
