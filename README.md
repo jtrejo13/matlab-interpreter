@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jtrejo13/matlab-interpreter.svg?branch=master)](https://travis-ci.org/jtrejo13/matlab-interpreter)
+
 # MATLAB interpreter
 
 A (simplified) MATLAB language interpreter. 
