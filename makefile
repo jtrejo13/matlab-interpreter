@@ -2,16 +2,20 @@
 
 FILES1 :=               \
     Interpreter         \
+    Parser              \
     RunInterpreter      \
-    TestInterpreter
+    Scanner             \
+    TestInterpreter     
 
 FILES2 :=               \
     Interpreter.html    \
     Interpreter.log     \
     Interpreter.py      \
+    Parser.py           \
     RunInterpreter.in   \
     RunInterpreter.out  \
     RunInterpreter.py   \
+    Scanner.py          \
     TestInterpreter.py  \
     .travis.yml  
 
@@ -21,7 +25,7 @@ ifeq ($(shell uname), Darwin)          # Apple
     PYLINT   := pylint
     MYPY     := mypy
     COVERAGE := coverage
-    PYDOC    := pydoc
+    PYDOC    := pydoc3
     AUTOPEP8 := autopep8
 else ifeq ($(CI), true)                # Travis CI
     PYTHON   := python3.5
@@ -66,7 +70,7 @@ RunInterpreter.pyx: Interpreter RunInterpreter
 		$(PYTHON) RunInterpreter.py < RunInterpreter.in > RunInterpreter.tmp
 		-diff RunInterpreter.tmp RunInterpreter.out
 
-TestInterpreter.pyx: Interpreter TestInterpreter .pylintrc
+TestInterpreter.pyx: Interpreter Parser Scanner TestInterpreter .pylintrc
 		-$(COVERAGE) run    --branch TestInterpreter.py
 		-$(COVERAGE) report -m
 
