@@ -72,7 +72,7 @@ Give an example
 * [Pylint](https://www.pylint.org/) - Code static analysis
 * [unittest](https://docs.python.org/3.5/library/unittest.html) - Unit testing
 * [coverage](https://pypi.python.org/pypi/coverage) - Code coverage
-* [Pydoc](https://docs.python.org/2/library/pydoc.html) - Automated documentation
+* [Pydoc](https://docs.python.org/3.4/library/pydoc.html) - Automated documentation
 * [autopep8](https://pypi.python.org/pypi/autopep8) - Automated formatting
 * [TravisCI](https://education.travis-ci.com/) - Continious integration
 
@@ -94,4 +94,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Inspired by [rspivak](https://github.com/rspivak) and his 'simple Pascal interpreter' [project](https://github.com/rspivak/lsbasi)
+* Inspired by [rspivak](https://github.com/rspivak) and his 'Let's Build a Simple Pascal Interpreter' [project](https://github.com/rspivak/lsbasi)
