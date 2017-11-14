@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/jtrejo13/matlab-interpreter.svg?branch=master)](https://travis-ci.org/jtrejo13/matlab-interpreter)
+[![Language](https://img.shields.io/badge/language-python-blue.svg)]()
 
 # MATLAB interpreter
 
