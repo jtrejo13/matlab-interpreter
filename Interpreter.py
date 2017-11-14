@@ -1,3 +1,8 @@
+# pylint: disable = unused-wildcard-import
+# pylint: disable = too-few-public-methods
+# pylint: disable = no-self-use
+# pylint: disable = invalid-name
+
 """
 Filename: Interpreter.py
 Description:
@@ -9,7 +14,7 @@ Github:    https://github.com/jtrejo13
 # imports
 # -------
 
-from typing import IO
+from typing import IO, Dict
 from Scanner import *
 from Parser import Parser
 
@@ -169,7 +174,6 @@ def interp_read(text: str):
     text to evaluate
     """
     return Parser(Scanner(text))
-
 # ------------
 # interp_eval
 # ------------
@@ -180,20 +184,23 @@ def interp_eval(parser: Parser):
     parser to evaluate input
     """
     interp = Interpreter(parser)
-    result = interp.interpret()
-    return result
+    interp.interpret()
+    return interp.GLOBAL_SCOPE
 
 # ------------
 # interp_print
 # ------------
 
 
-def interp_print(writer: IO[str], result: str):
+def interp_print(writer: IO[str], result: Dict):
     """
     writer for output
     result to be printed
     """
-    writer.write(str(result) + '\n')
+    output = []
+    for key in result:
+        output.append(str(key) + '=' + str(result[key]))
+    writer.write(str('\n'.join(output)) + '\n')
 
 # ------------
 # interp_solve
@@ -205,7 +212,10 @@ def interp_solve(reader: IO[str], writer: IO[str]):
     reader with input
     writer for output
     """
+    statements = []
     for line in reader:
-        parser = interp_read(line)
-        result = interp_eval(parser)
-        interp_print(writer, result)
+        statements.append(line)
+    script = ''.join(statements)
+    parser = interp_read(script)
+    result = interp_eval(parser)
+    interp_print(writer, result)

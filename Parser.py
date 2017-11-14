@@ -1,3 +1,7 @@
+# pylint: disable = unused-wildcard-import
+# pylint: disable = too-few-public-methods
+# pylint: disable = no-self-use
+
 """
 Filename: Parser.py
 Description: Parser of the MATLAB language
@@ -23,7 +27,7 @@ class Node(object):
 
 class Compound(Node):
     """
-    Node sub-class to represent a Compound element in a MATLAB 
+    Node sub-class to represent a Compound element in a MATLAB
     Abstract Syntax Tree. In this implementation the Compound
     element is the whole script
 
@@ -47,16 +51,16 @@ class BinaryOp(Node):
     token(Token): A binary operator token.
     """
 
-    def __init__(self, left, op, right):
+    def __init__(self, left, operator, right):
         Node.__init__(self)
         self.left = left
-        self.token = self.op = op
+        self.token = operator
         self.right = right
 
 
 class UnaryOp(Node):
     """
-    Node sub-class to represent a 'unary operation' in 
+    Node sub-class to represent a 'unary operation' in
     a MATLAB Abstract Syntax Tree. Examples: --1 or -(+2)
 
     Attributes:
@@ -64,15 +68,15 @@ class UnaryOp(Node):
     token(Token): A unary operator token
     """
 
-    def __init__(self, op, right):
+    def __init__(self, operator, right):
         Node.__init__(self)
         self.right = right
-        self.token = op
+        self.token = operator
 
 
 class Assign(Node):
     """
-    Node sub-class to represent an 'assignment' in 
+    Node sub-class to represent an 'assignment' in
     a MATLAB Abstract Syntax Tree. Examples: x = 2, myVar = 2 * 3 + 5
 
     Attributes:
@@ -90,7 +94,7 @@ class Assign(Node):
 
 class Var(Node):
     """
-    Node sub-class to represent a 'variable' or 'identifier' 
+    Node sub-class to represent a 'variable' or 'identifier'
     in a MATLAB Abstract Syntax Tree. Examples: myVar, PI, area
 
     Attributes:
@@ -231,7 +235,7 @@ class Parser(object):
             node = self.expr()
             self.eat(RPAREN)
             return node
-        else:
+        elif token.type == ID:
             node = self.variable()
             return node
         self.raise_error()
@@ -256,16 +260,16 @@ class Parser(object):
         raise Exception('Invalid syntax error.')
 
 
-"""
-def print_tree(tree, indent=3):
-    if tree.right:
-        print_tree(tree.right, indent + 4)
-        print(indent * ' ' + '  /')
-    print(indent * ' ' + str(tree.token))
-    if tree.left:
-        print(indent * ' ' + '  \\')
-        print_tree(tree.left, indent + 4)
-"""
+
+# def print_tree(tree, indent=3):
+#     if tree.right:
+#         print_tree(tree.right, indent + 4)
+#         print(indent * ' ' + '  /')
+#     print(indent * ' ' + str(tree.token))
+#     if tree.left:
+#         print(indent * ' ' + '  \\')
+#         print_tree(tree.left, indent + 4)
+
 
 
 def get_expr(tree):

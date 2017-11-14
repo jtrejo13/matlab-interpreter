@@ -1,4 +1,6 @@
 # pylint: disable = missing-docstring
+# pylint: disable = unused-wildcard-import
+# pylint: disable = wildcard-import
 
 """
 Filename: TestInterpreter.py
@@ -13,8 +15,9 @@ Github:    https://github.com/jtrejo13
 
 from unittest import main, TestCase
 from Scanner import Token, Scanner, INTEGER, PLUS
+from io import StringIO
 from Parser import *
-from Interpreter import Interpreter
+from Interpreter import * 
 
 # -----------
 # TestScanner
@@ -207,6 +210,10 @@ class TestParser(TestCase):
 
 class TestInterpreter(TestCase):
 
+    # -----------
+    # Interpreter
+    # -----------
+
     def test_interp_express_0(self):
         scanner = Scanner('x = 1;')
         parser = Parser(scanner)
@@ -293,9 +300,11 @@ class TestInterpreter(TestCase):
         self.assertEqual(result, interp.GLOBAL_SCOPE)
 
     def test_interp_express_9(self):
-        script = """radius = 2.5;                     % the radius
-                    PI = 3.14159;                     % PI constant
-                    area = PI * radius * radius;      % the area"""
+        script = """\
+        radius = 2.5;                     % the radius
+        PI = 3.14159;                     % PI constant
+        area = PI * radius * radius;      % the area
+        """
         scanner = Scanner(script)
         parser = Parser(scanner)
         interp = Interpreter(parser)
@@ -303,11 +312,47 @@ class TestInterpreter(TestCase):
         result = {'radius': 2.5, 'PI': 3.14159, 'area': 19.6349375}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
 
+    # ----
+    # REPL
+    # ----
 
-# --------
-# TestREPL
-# --------
+    def test_interpret_read(self):
+        script = """\
+        x = 3;
+        y = 10;
+        res = x + y;
+        """
+        parser = interp_read(script)
+        self.assertTrue(isinstance(parser, Parser))
 
+    def test_interpret_eval(self):
+        script = """\
+        x = 3;
+        y = 10;
+        res = x + y;
+        """
+        expected = {'x': 3, 'y':10, 'res': 13}
+        self.assertEqual(expected, interp_eval(Parser(Scanner(script))))
+
+    def test_interpret_print(self):
+        script = """\
+        x = 3;
+        y = 10;
+        res = x + y;
+        """
+        writer = StringIO()
+        interp = Interpreter(Parser(Scanner(script)))
+        interp.interpret()
+        expected = 'x=3\ny=10\nres=13\n'
+        interp_print(writer, interp.GLOBAL_SCOPE)
+        self.assertEqual(expected, writer.getvalue())
+
+    def test_interpret_solve(self):
+        reader = StringIO("x=3;\ny=10;\nres=x + y;\n")
+        writer = StringIO()
+        interp_solve(reader, writer)
+        expected = 'x=3\ny=10\nres=13\n'
+        self.assertEqual(expected, writer.getvalue())
 
 # ----
 # main

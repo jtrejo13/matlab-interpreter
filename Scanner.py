@@ -1,6 +1,9 @@
+# pylint: disable = unused-wildcard-import
+# pylint: disable = too-few-public-methods
+
 """
 Filename: Scanner.py
-Description: Tokenizer to break text input into tokens 
+Description: Tokenizer to break text input into tokens
              The tokenizer is built to suport a MATLAB script with basic
              functionality as input
 Author:    Juan Trejo
@@ -13,15 +16,15 @@ Github:    https://github.com/jtrejo13
 
 from typing import Dict
 
-"""
-Token Types
-
-ID (variable name): used to represent an identifier,
-or variable, in the program
-
-EOF (end-of-file): token is used to indicate that
-there is no more input left for lexical analysis
-"""
+# ----------------------------------------------------
+# Token Types
+#
+# ID (variable name): used to represent an identifier,
+# or variable, in the program
+#
+# EOF (end-of-file): token is used to indicate that
+# there is no more input left for lexical analysis
+# ----------------------------------------------------
 ID, INTEGER, FLOAT, ASSIGN, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN, SEMI, EOF = (
     'ID', 'INTEGER', 'FLOAT', 'ASSIGN', 'PLUS', 'MINUS', 'MUL', 'DIV', 'LPAREN', 'RPAREN', 'SEMI', 'EOF'
 )
@@ -30,10 +33,10 @@ ID, INTEGER, FLOAT, ASSIGN, PLUS, MINUS, MUL, DIV, LPAREN, RPAREN, SEMI, EOF = (
 """
 Reserved Keywords
 
-Words that cannot be used as identifier, such as the name 
-of a variable or function 
+Words that cannot be used as identifier, such as the name
+of a variable or function
 """
-RESERVED_KEYWORDS = {}  # type: Dict[str, Token] 
+RESERVED_KEYWORDS = {}  # type: Dict[str, Token]
 
 
 class Token(object):
@@ -42,11 +45,11 @@ class Token(object):
 
     Args:
         type  (Token Type): The type of the token
-        value (str_int_or_float): The value of the token 
+        value (str_int_or_float): The value of the token
 
     Attributes:
         type  (Token Type): The type of the token
-        value (str_int_or_float): The value of the token 
+        value (str_int_or_float): The value of the token
     """
 
     def __init__(self, type, value):
@@ -90,7 +93,7 @@ class Scanner(object):
         self._pos = 0
         try:
             self.current_char = self.text[self._pos]
-        except:
+        except IndexError:
             self.current_char = None
 
     def next_token(self):
@@ -196,8 +199,8 @@ class Scanner(object):
         peek_pos = self._pos + 1
         if peek_pos > len(self.text) - 1:
             return None
-        else:
-            return self.text[peek_pos]
+        # else: still in bounds
+        return self.text[peek_pos]
 
     def _skip_comment(self):
         while self.current_char is not None \
