@@ -84,9 +84,9 @@ For the versions available, see the [tags on this repository](https://github.com
 ## Author
 
 * **Juan Trejo**
-[GitHub](https://github.com/jtrejo13)
-[LinkedIn](https://www.linkedin.com/in/jtrejo13/)
-[Home](https://jtrejo13.github.io/)
+- [GitHub](https://github.com/jtrejo13)
+- [LinkedIn](https://www.linkedin.com/in/jtrejo13/)
+- [Home](https://jtrejo13.github.io/)
 
 ## License
 
