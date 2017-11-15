@@ -1,0 +1,8 @@
+autopep8
+coverage
+numpy
+pep8
+pip
+pylint
+mypy
+astroid
