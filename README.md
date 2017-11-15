@@ -20,50 +20,105 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Requirements for execution:
 
 ```
-Give examples
+python (3.5)
+pip (8.1.2)
+make (4.0)
+autopep8 (1.2.4)
+coverage (4.2)
+numpy (1.11.1)
+pep8 (1.7.0)
+pip (8.1.2)
+pylint (1.6.4)
+mypy
+astroid (1.4.8)
+pydoc3.5
+
 ```
 
-### Installing
+### Installation
 
 A step by step series of examples that tell you have to get a development env running
 
-Say what the step will be
+#### Option 1: Virtual Environment
 
-```
-Give the example
-```
+This option assumes python and pip (v3) are installed in your machine.
 
-And repeat
+1) Install the virtual environment library (virtualenv) via pip:
 
-```
-until finished
+```bash
+$ pip install virtualenv
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+2) Test your installation:
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+```bash
+$ virtualenv --version
 ```
 
-### And coding style tests
+3) Create a virtual environment for a project:
 
-Explain what these tests test and why
-
+```bash
+$ cd my_project_folder
+$ virtualenv env
 ```
-Give an example
+
+4) To begin using the virtual environment, it needs to be activated:
+
+```bash
+$ source env/bin/activate
 ```
 
+5) And requirements need to be installed:
+
+```bash
+$ pip install -r requirements.txt
+```
+6) After installing the requirements, you are ready to execute the interpreter:
+
+```bash
+$ execute
+```
+
+#### Option 2: Docker - Virtual Machine
+
+1) Download and install Docker [here](https://www.docker.com/community-edition#/download)
+
+2) Verify that installation was successful:
+
+```bash
+$ docker --version
+```
+
+3) Pull the following image for the virtual machine:
+```bash
+$ docker pull gpdowning/python
+```
+
+4) Verify successful pull:
+```bash
+$ docker images
+
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+gpdowning/python    latest              9e0a05a1bd40        7 days ago          783.1 MB
+python              3.5.2               58528474c16a        2 weeks ago         683.2 MB
+```
+
+5) Run docker within project directory:
+```bash
+$ cd my_project_folder
+$ pwd
+$ my_project_folder_full_path
+$ docker run -it -v my_project_folder_full_path:/usr/user_name -w /usr/user_name gpdowning/python
+```
+
+6) After successfully running virtual machine, you are ready to execute the interpreter:
+
+```bash
+$ execute
+```
 
 ## Tools
 
