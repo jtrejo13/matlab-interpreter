@@ -18,31 +18,9 @@ This interpreter was written in Python and it directly executes instructions wri
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-Requirements for execution:
-
-```
-python (3.5)
-pip (8.1.2)
-make (4.0)
-autopep8 (1.2.4)
-coverage (4.2)
-numpy (1.11.1)
-pep8 (1.7.0)
-pip (8.1.2)
-pylint (1.6.4)
-mypy
-astroid (1.4.8)
-pydoc3.5
-
-```
-
-### Installation
-
 A step by step series of examples that tell you have to get a development env running
 
-#### Option 1: Virtual Environment
+### Installation Option 1: Virtual Environment
 
 This option assumes python and pip (v3) are installed in your machine.
 
@@ -82,7 +60,7 @@ $ pip install -r requirements.txt
 $ execute
 ```
 
-#### Option 2: Docker - Virtual Machine
+### Installation Option 2: Docker - Virtual Machine
 
 1) Download and install Docker [here](https://www.docker.com/community-edition#/download)
 
