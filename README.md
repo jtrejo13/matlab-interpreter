@@ -8,21 +8,40 @@ A (simplified) MATLAB language interpreter.
 
 ## About
 
-This interpreter was written in Python and it directly executes instructions written in the MATLAB language. The interpreter uses the following strategies for program execution:
+This interpreter directly executes instructions written in the MATLAB language. The interpreter was written in Python and it uses the following strategies for parsing and analyzing the statements in a MATLAB script:
 
 1) Reads and 'tokenizes' the input source code
 2) Parses the tokenized source code and produces an Abstract Syntax Tree (AST)
 3) Traverses and interprets the AST, executing expressions as it moves along the tree
 
-## Getting Started
+## Current Version Features
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Currently, the main feature of the interpreter is the ability to evaluate a series of mathematical expressions and assign the result to an identifier (or variable). The interpreter 'remembers' that variable by maintaining it in scope and is then able to evaluate future expressions referencing a variable. Finally the interpreter is also able to ignore comments. Below is an example:
 
-A step by step series of examples that tell you have to get a development env running
+### Example Input
+```matlab
+radius = 1.5      % the radius
+PI     = 3.14     % pi constant
 
-### Installation Option 1: Virtual Environment
+% area of the circle
+area   = PI * radius * radius
+```
+### Example Output
+```matlab
+radius=1.5
+PI=3.14
+area=7.065
+```
 
-This option assumes python and pip (v3) are installed in your machine.
+## Future Capabilities
+
+## Set Up
+
+Follow these instructions to get the project running on your local machine for development and testing
+
+### Option 1: Virtual Environment
+
+This option assumes python 3.5, pip, and make are installed in your machine.
 
 1) Install the virtual environment library (virtualenv) via pip:
 
@@ -30,52 +49,36 @@ This option assumes python and pip (v3) are installed in your machine.
 $ pip install virtualenv
 ```
 
-2) Test your installation:
-
-```bash
-$ virtualenv --version
-```
-
-3) Create a virtual environment for a project:
+2) Create a virtual environment for a project:
 
 ```bash
 $ cd my_project_folder
 $ virtualenv env
 ```
 
-4) To begin using the virtual environment, it needs to be activated:
+3) To begin using the virtual environment, it needs to be activated and the requirements need to be installed:
 
 ```bash
 $ source env/bin/activate
-```
-
-5) And requirements need to be installed:
-
-```bash
 $ pip install -r requirements.txt
 ```
-6) After installing the requirements, you are ready to execute the interpreter:
+
+5) Execute the interpreter:
 
 ```bash
 $ execute
 ```
 
-### Installation Option 2: Docker - Virtual Machine
+### Option 2: Docker - Virtual Machine
 
-1) Download and install Docker [here](https://www.docker.com/community-edition#/download)
+1) Download and install [Docker](https://www.docker.com/community-edition#/download) on your machine
 
-2) Verify that installation was successful:
-
-```bash
-$ docker --version
-```
-
-3) Pull the following image for the virtual machine:
+2) Pull the following image for the virtual machine:
 ```bash
 $ docker pull gpdowning/python
 ```
 
-4) Verify successful pull:
+3) Verify successful pull:
 ```bash
 $ docker images
 
@@ -84,7 +87,7 @@ gpdowning/python    latest              9e0a05a1bd40        7 days ago          
 python              3.5.2               58528474c16a        2 weeks ago         683.2 MB
 ```
 
-5) Run docker within project directory:
+4) Run docker within project directory:
 ```bash
 $ cd my_project_folder
 $ pwd
@@ -92,13 +95,15 @@ $ my_project_folder_full_path
 $ docker run -it -v my_project_folder_full_path:/usr/user_name -w /usr/user_name gpdowning/python
 ```
 
-6) After successfully running virtual machine, you are ready to execute the interpreter:
+5) Execute the interpreter:
 
 ```bash
 $ execute
 ```
 
 ## Tools
+
+This project uses the following software development tools:
 
 * [Python 3](https://docs.python.org/3/) - The programming language
 * [Make](https://www.gnu.org/software/make/) - Automated builds
