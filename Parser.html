@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Parser</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Parser</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/jtrj13/Documents/Developer/Learn2Code/Python_Programming/matlab-interpreter/Parser.py">/Users/jtrj13/Documents/Developer/Learn2Code/Python_Programming/matlab-interpreter/Parser.py</a></font></td></tr></table>
+    <p><tt>Filename:&nbsp;<a href="#Parser">Parser</a>.py<br>
+Description:&nbsp;<a href="#Parser">Parser</a>&nbsp;of&nbsp;the&nbsp;MATLAB&nbsp;language<br>
+Author:&nbsp;&nbsp;&nbsp;&nbsp;Juan&nbsp;Trejo<br>
+Github:&nbsp;&nbsp;&nbsp;&nbsp;https://github.com/jtrejo13</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="Parser.html#Node">Node</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="Parser.html#Assign">Assign</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Parser.html#BinaryOp">BinaryOp</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Parser.html#Compound">Compound</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Parser.html#Num">Num</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Parser.html#UnaryOp">UnaryOp</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Parser.html#Var">Var</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="Parser.html#Parser">Parser</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Assign">class <strong>Assign</strong></a>(<a href="Parser.html#Node">Node</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Node">Node</a>&nbsp;sub-class&nbsp;to&nbsp;represent&nbsp;an&nbsp;'assignment'&nbsp;in<br>
+a&nbsp;MATLAB&nbsp;Abstract&nbsp;Syntax&nbsp;Tree.&nbsp;Examples:&nbsp;x&nbsp;=&nbsp;2,&nbsp;myVar&nbsp;=&nbsp;2&nbsp;*&nbsp;3&nbsp;+&nbsp;5<br>
+&nbsp;<br>
+Attributes:<br>
+left(<a href="#Var">Var</a>):&nbsp;The&nbsp;child&nbsp;<a href="#Var">Var</a>&nbsp;on&nbsp;the&nbsp;left<br>
+right(<a href="#Node">Node</a>):&nbsp;The&nbsp;child&nbsp;<a href="#Node">Node</a>&nbsp;on&nbsp;the&nbsp;right<br>
+token(Token):&nbsp;An&nbsp;assignment&nbsp;token<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Parser.html#Assign">Assign</a></dd>
+<dd><a href="Parser.html#Node">Node</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Assign-__init__"><strong>__init__</strong></a>(self, left, op, right)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="Parser.html#Node">Node</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BinaryOp">class <strong>BinaryOp</strong></a>(<a href="Parser.html#Node">Node</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Node">Node</a>&nbsp;sub-class&nbsp;to&nbsp;represent&nbsp;a&nbsp;'binary&nbsp;operation'&nbsp;in<br>
+a&nbsp;MATLAB&nbsp;Abstract&nbsp;Syntax&nbsp;Tree.&nbsp;Examples:&nbsp;2&nbsp;*&nbsp;3&nbsp;or&nbsp;10&nbsp;/&nbsp;2<br>
+&nbsp;<br>
+Attributes:<br>
+left(<a href="#Node">Node</a>):&nbsp;The&nbsp;child&nbsp;<a href="#Node">Node</a>&nbsp;on&nbsp;the&nbsp;left<br>
+right(<a href="#Node">Node</a>):&nbsp;The&nbsp;child&nbsp;<a href="#Node">Node</a>&nbsp;on&nbsp;the&nbsp;right<br>
+token(Token):&nbsp;A&nbsp;binary&nbsp;operator&nbsp;token.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Parser.html#BinaryOp">BinaryOp</a></dd>
+<dd><a href="Parser.html#Node">Node</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BinaryOp-__init__"><strong>__init__</strong></a>(self, left, operator, right)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="Parser.html#Node">Node</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Compound">class <strong>Compound</strong></a>(<a href="Parser.html#Node">Node</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Node">Node</a>&nbsp;sub-class&nbsp;to&nbsp;represent&nbsp;a&nbsp;<a href="#Compound">Compound</a>&nbsp;element&nbsp;in&nbsp;a&nbsp;MATLAB<br>
+Abstract&nbsp;Syntax&nbsp;Tree.&nbsp;In&nbsp;this&nbsp;implementation&nbsp;the&nbsp;<a href="#Compound">Compound</a><br>
+element&nbsp;is&nbsp;the&nbsp;whole&nbsp;script<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;statements(list&nbsp;of&nbsp;<a href="#Node">Node</a>):&nbsp;The&nbsp;statements&nbsp;included&nbsp;in&nbsp;the&nbsp;MATLAB&nbsp;script<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Parser.html#Compound">Compound</a></dd>
+<dd><a href="Parser.html#Node">Node</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Compound-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="Parser.html#Node">Node</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Node">class <strong>Node</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;representing&nbsp;a&nbsp;binary&nbsp;tree&nbsp;node<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Node-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Num">class <strong>Num</strong></a>(<a href="Parser.html#Node">Node</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Node">Node</a>&nbsp;sub-class&nbsp;to&nbsp;represent&nbsp;a&nbsp;positive&nbsp;numer&nbsp;in<br>
+a&nbsp;MATLAB&nbsp;Abstract&nbsp;Syntax&nbsp;Tree.&nbsp;Examples:&nbsp;3.14159,&nbsp;10<br>
+&nbsp;<br>
+Attributes:<br>
+token(Token):&nbsp;A&nbsp;FLOAT&nbsp;or&nbsp;INTEGER&nbsp;token<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Parser.html#Num">Num</a></dd>
+<dd><a href="Parser.html#Node">Node</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Num-__init__"><strong>__init__</strong></a>(self, token)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="Parser.html#Node">Node</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Parser">class <strong>Parser</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;class&nbsp;to&nbsp;parse&nbsp;a&nbsp;series&nbsp;of&nbsp;tokens&nbsp;representing&nbsp;the&nbsp;MATLAB&nbsp;language<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;scanner(Scanner):&nbsp;A&nbsp;scanner&nbsp;<a href="builtins.html#object">object</a>&nbsp;constructed&nbsp;with&nbsp;the&nbsp;text&nbsp;input&nbsp;to&nbsp;be&nbsp;parsed<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;scanner(Scanner):&nbsp;A&nbsp;scanner&nbsp;<a href="builtins.html#object">object</a>&nbsp;constructed&nbsp;with&nbsp;the&nbsp;text&nbsp;input&nbsp;to&nbsp;be&nbsp;parsed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;current_token(Token):&nbsp;The&nbsp;current&nbsp;token&nbsp;being&nbsp;analyzed&nbsp;by&nbsp;the&nbsp;parser<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Parser-__init__"><strong>__init__</strong></a>(self, scanner)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Parser-assignment_statement"><strong>assignment_statement</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Parser-eat"><strong>eat</strong></a>(self, token_type)</dt><dd><tt>Advances&nbsp;parser&nbsp;by&nbsp;a&nbsp;single&nbsp;token</tt></dd></dl>
+
+<dl><dt><a name="Parser-expr"><strong>expr</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Parser-factor"><strong>factor</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Parser-parse"><strong>parse</strong></a>(self)</dt><dd><tt>Parses&nbsp;the&nbsp;text&nbsp;input&nbsp;passed&nbsp;via&nbsp;the&nbsp;scanner<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Node">Node</a>:&nbsp;An&nbsp;Abstract&nbsp;Syntax&nbsp;Tree&nbsp;(AST)&nbsp;representing&nbsp;the&nbsp;input&nbsp;passed<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Exception:&nbsp;If&nbsp;invalid&nbsp;syntax&nbsp;is&nbsp;encountered</tt></dd></dl>
+
+<dl><dt><a name="Parser-raise_error"><strong>raise_error</strong></a>(self)</dt><dd><tt>Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Exception:&nbsp;Invalid&nbsp;sytax&nbsp;error</tt></dd></dl>
+
+<dl><dt><a name="Parser-script"><strong>script</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Parser-statement"><strong>statement</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Parser-statement_list"><strong>statement_list</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Parser-term"><strong>term</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Parser-variable"><strong>variable</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="UnaryOp">class <strong>UnaryOp</strong></a>(<a href="Parser.html#Node">Node</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Node">Node</a>&nbsp;sub-class&nbsp;to&nbsp;represent&nbsp;a&nbsp;'unary&nbsp;operation'&nbsp;in<br>
+a&nbsp;MATLAB&nbsp;Abstract&nbsp;Syntax&nbsp;Tree.&nbsp;Examples:&nbsp;--1&nbsp;or&nbsp;-(+2)<br>
+&nbsp;<br>
+Attributes:<br>
+right(<a href="#Node">Node</a>):&nbsp;The&nbsp;child&nbsp;<a href="#Node">Node</a>&nbsp;on&nbsp;the&nbsp;right<br>
+token(Token):&nbsp;A&nbsp;unary&nbsp;operator&nbsp;token<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Parser.html#UnaryOp">UnaryOp</a></dd>
+<dd><a href="Parser.html#Node">Node</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="UnaryOp-__init__"><strong>__init__</strong></a>(self, operator, right)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="Parser.html#Node">Node</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Var">class <strong>Var</strong></a>(<a href="Parser.html#Node">Node</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Node">Node</a>&nbsp;sub-class&nbsp;to&nbsp;represent&nbsp;a&nbsp;'variable'&nbsp;or&nbsp;'identifier'<br>
+in&nbsp;a&nbsp;MATLAB&nbsp;Abstract&nbsp;Syntax&nbsp;Tree.&nbsp;Examples:&nbsp;myVar,&nbsp;PI,&nbsp;area<br>
+&nbsp;<br>
+Attributes:<br>
+token(Token):&nbsp;An&nbsp;ID&nbsp;token<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Parser.html#Var">Var</a></dd>
+<dd><a href="Parser.html#Node">Node</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Var-__init__"><strong>__init__</strong></a>(self, token)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="Parser.html#Node">Node</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-get_expr"><strong>get_expr</strong></a>(tree)</dt><dd><tt>Converts&nbsp;an&nbsp;AST&nbsp;back&nbsp;into&nbsp;the&nbsp;original&nbsp;'linear'&nbsp;expression.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tree(<a href="#Node">Node</a>):&nbsp;The&nbsp;root&nbsp;of&nbsp;an&nbsp;AST&nbsp;to&nbsp;be&nbsp;'linearized'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;String&nbsp;representation&nbsp;of&nbsp;expression<br>
+&nbsp;<br>
+Examples:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parser&nbsp;=&nbsp;<a href="#Parser">Parser</a>(Scanner('x&nbsp;=&nbsp;2&nbsp;+&nbsp;5'))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;myAST&nbsp;=&nbsp;parser.parse()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;expression&nbsp;=&nbsp;<a href="#-get_expr">get_expr</a>(myAST)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;expression&nbsp;==&nbsp;'x=2+5'</tt></dd></dl>
+ <dl><dt><a name="-print_expr_recurs"><strong>print_expr_recurs</strong></a>(tree, output)</dt><dd><tt>Helper&nbsp;recursive&nbsp;function&nbsp;for&nbsp;print_expr</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>ASSIGN</strong> = 'ASSIGN'<br>
+<strong>DIV</strong> = 'DIV'<br>
+<strong>EOF</strong> = 'EOF'<br>
+<strong>FLOAT</strong> = 'FLOAT'<br>
+<strong>ID</strong> = 'ID'<br>
+<strong>INTEGER</strong> = 'INTEGER'<br>
+<strong>LPAREN</strong> = 'LPAREN'<br>
+<strong>MINUS</strong> = 'MINUS'<br>
+<strong>MUL</strong> = 'MUL'<br>
+<strong>PLUS</strong> = 'PLUS'<br>
+<strong>RESERVED_KEYWORDS</strong> = {}<br>
+<strong>RPAREN</strong> = 'RPAREN'<br>
+<strong>SEMI</strong> = 'SEMI'</td></tr></table>
+</body></html>

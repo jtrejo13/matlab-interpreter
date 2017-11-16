@@ -56,8 +56,8 @@ endif
 .pylintrc:
 		$(PYLINT) --disable=locally-disabled --reports=no --generate-rcfile > $@
 
-Interpreter.html: Interpreter.py
-		$(PYDOC) -w Interpreter
+Interpreter.html: Interpreter
+		$(PYDOC) -w Interpreter Parser Scanner
 
 Interpreter.log:
 		git log > Interpreter.log
