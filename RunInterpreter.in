@@ -1,3 +1,33 @@
-x = 23;
-var = 10 + 23;
-y = 100.5;
+% Areas
+
+% Constants
+PI = 3.14;
+
+% Square
+s = 4;		                % side length
+areaSquare = s * s;		    % area of the square
+
+% Rectangle
+b = 2.5;					% base of the rectangle
+h = 10;						% height of the rectangle
+areaRect = b * h;			% area of the rectangle
+
+% Circle
+r = 2.5;       		   		% the radius
+areaCircle = PI * r * r;    % area of the circle
+
+% Volumes
+
+% Cube
+l = 2.5; 					% side lenght
+volCube = l * l * l; 		% volume of the cube
+
+% Shpere
+r = 9;						% radius of the sphere
+volSphere = 4/3*PI*r*r*r;   % volume of the shpere
+
+
+
+
+
+

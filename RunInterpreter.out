@@ -1,3 +1,11 @@
-x=23
-var=33
-y=100.5
+PI=3.14
+s=4
+areaSquare=16
+b=2.5
+h=10
+areaRect=25.0
+r=9
+areaCircle=19.625
+l=2.5
+volCube=15.625
+volSphere=3052.08
