@@ -1,6 +1,6 @@
 [![Language](https://img.shields.io/badge/language-python-blue.svg)]()
 [![Build Status](https://travis-ci.org/jtrejo13/matlab-interpreter.svg?branch=master)](https://travis-ci.org/jtrejo13/matlab-interpreter)
-[![Codecov](https://img.shields.io/codecov/c/github/jtrejo13/matlab-interpreter.svg)]()
+[![Codecov](https://img.shields.io/codecov/c/github/jtrejo13/matlab-interpreter.svg)](https://codecov.io/gh/jtrejo13/matlab-interpreter)
 
 # MATLAB interpreter
 
