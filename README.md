@@ -33,7 +33,18 @@ PI=3.14
 area=7.065
 ```
 
-## Future Capabilities
+## Future Work
+
+### Enhancements:
+* Basic function support:
+  - Trigonometry: cos, sin, tan
+  - Arithmetic: power, floor, mod, round, abs
+  - Exponents: exp, log, sqrt
+
+* Matrix support
+  - Ex. `A = [1, 2, 3; 4, 5, 6; 7, 8, 9]`
+
+### Matrix Support
 
 ## Set Up
 
@@ -63,12 +74,6 @@ $ source env/bin/activate
 $ pip install -r requirements.txt
 ```
 
-5) Execute the interpreter:
-
-```bash
-$ execute
-```
-
 ### Option 2: Docker - Virtual Machine
 
 1) Download and install [Docker](https://www.docker.com/community-edition#/download) on your machine
@@ -95,11 +100,9 @@ $ my_project_folder_full_path
 $ docker run -it -v my_project_folder_full_path:/usr/user_name -w /usr/user_name gpdowning/python
 ```
 
-5) Execute the interpreter:
+## Running the Interpreter
 
-```bash
-$ execute
-```
+
 
 ## Tools
 
