@@ -68,7 +68,7 @@ Interpreter.log:
 
 RunInterpreter.pyx: Interpreter RunInterpreter
 		$(PYTHON) RunInterpreter.py < RunInterpreter.in > RunInterpreter.tmp
-		-diff RunInterpreter.tmp RunInterpreter.out
+		-diff RunInterpreter.tmp RunInterpreter.out -B
 
 TestInterpreter.pyx: Interpreter Parser Scanner TestInterpreter .pylintrc
 		-$(COVERAGE) run    --branch TestInterpreter.py
