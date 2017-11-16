@@ -1,4 +1,4 @@
-[![Language](https://img.shields.io/badge/language-python-blue.svg)]()
+[![Language](https://img.shields.io/badge/language-python-blue.svg)](https://docs.python.org/3/)
 [![Build Status](https://travis-ci.org/jtrejo13/matlab-interpreter.svg?branch=master)](https://travis-ci.org/jtrejo13/matlab-interpreter)
 [![Codecov](https://img.shields.io/codecov/c/github/jtrejo13/matlab-interpreter.svg)](https://codecov.io/gh/jtrejo13/matlab-interpreter)
 
@@ -17,7 +17,6 @@ A (simplified) MATLAB language interpreter.
 - [Author](#author)
 - [Acknowledgements](#acknowledgements)
 
-
 ## About
 
 This interpreter directly executes instructions written in the MATLAB language. The interpreter was written in Python and it uses the following strategies for parsing and analyzing the statements in a MATLAB script:
@@ -30,7 +29,7 @@ This interpreter directly executes instructions written in the MATLAB language. 
 
 ### Current Version (v1.0)
 
-Currently, the main feature of the interpreter is the ability to evaluate a series of mathematical expressions and assign the result to an identifier (or variable). The interpreter 'remembers' that variable by maintaining it in scope and is then able to evaluate future expressions referencing a variable. Finally the interpreter is also able to ignore comments. Below is an example:
+Currently, the main feature of the interpreter is the ability to evaluate a series of simple mathematical expressions (+, -, *, /) and assign the result to an identifier (or variable). The interpreter 'remembers' that variable by maintaining it in scope and is then able to evaluate future expressions referencing such variable. Finally, the interpreter is also able to ignore MATLAB-style comments (%). Below is an example:
 
 #### Example Input
 ```matlab
@@ -38,7 +37,7 @@ radius = 1.5      % the radius
 PI     = 3.14     % pi constant
 
 % area of the circle
-area   = PI * radius * radius
+area   = PI * (radius * radius)
 ```
 #### Example Output
 ```matlab
@@ -113,7 +112,11 @@ $ docker run -it -v my_project_folder_full_path:/usr/user_name -w /usr/user_name
 
 ## Running the Interpreter
 
+To excecute your matlab script: 
 
+```bash
+$ python3 RunInterpreter.py < my_script.m
+```
 
 ## Tools
 
