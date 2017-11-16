@@ -6,6 +6,18 @@
 
 A (simplified) MATLAB language interpreter. 
 
+### Table of Contents
+
+- [About](#about)
+- [Features](#features)
+- [Set Up](#set-up)
+- [Running the Interpreter](#running-the-interpreter)
+- [Tools](#tools)
+- [Versioning](#versioning)
+- [Author](#author)
+- [Acknowledgements](#acknowledgements)
+
+
 ## About
 
 This interpreter directly executes instructions written in the MATLAB language. The interpreter was written in Python and it uses the following strategies for parsing and analyzing the statements in a MATLAB script:
@@ -125,9 +137,9 @@ For the versions available, see the [tags on this repository](https://github.com
 ## Author
 
 * **Juan Trejo**
-- [GitHub](https://github.com/jtrejo13)
-- [LinkedIn](https://www.linkedin.com/in/jtrejo13/)
-- [Home](https://jtrejo13.github.io/)
+  - [GitHub](https://github.com/jtrejo13)
+  - [LinkedIn](https://www.linkedin.com/in/jtrejo13/)
+  - [Home](https://jtrejo13.github.io/)
 
 ## License
 
