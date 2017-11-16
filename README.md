@@ -14,11 +14,13 @@ This interpreter directly executes instructions written in the MATLAB language. 
 2) Parses the tokenized source code and produces an Abstract Syntax Tree (AST)
 3) Traverses and interprets the AST, executing expressions as it moves along the tree
 
-## Current Version Features
+## Features
+
+### Current Version (v1.0)
 
 Currently, the main feature of the interpreter is the ability to evaluate a series of mathematical expressions and assign the result to an identifier (or variable). The interpreter 'remembers' that variable by maintaining it in scope and is then able to evaluate future expressions referencing a variable. Finally the interpreter is also able to ignore comments. Below is an example:
 
-### Example Input
+#### Example Input
 ```matlab
 radius = 1.5      % the radius
 PI     = 3.14     % pi constant
@@ -26,16 +28,15 @@ PI     = 3.14     % pi constant
 % area of the circle
 area   = PI * radius * radius
 ```
-### Example Output
+#### Example Output
 ```matlab
 radius=1.5
 PI=3.14
 area=7.065
 ```
 
-## Future Work
+### Future Work
 
-### Enhancements:
 * Basic function support:
   - Trigonometry: cos, sin, tan
   - Arithmetic: power, floor, mod, round, abs
@@ -43,8 +44,6 @@ area=7.065
 
 * Matrix support
   - Ex. `A = [1, 2, 3; 4, 5, 6; 7, 8, 9]`
-
-### Matrix Support
 
 ## Set Up
 
