@@ -46,7 +46,9 @@ PI=3.14
 area=7.065
 ```
 
-### Future Work
+### Ongoing and Future Work
+
+* Building a simple UI with wxPython
 
 * Basic function support:
   - Trigonometry: cos, sin, tan
