@@ -114,10 +114,10 @@ $ docker run -it -v my_project_folder_full_path:/usr/user_name -w /usr/user_name
 
 ## Running the Interpreter
 
-To excecute your matlab script: 
+To excecute the MATLAB Interpreter: 
 
 ```bash
-$ python3 RunInterpreter.py < my_script.m
+$ python3 app.py
 ```
 
 ## Tools
