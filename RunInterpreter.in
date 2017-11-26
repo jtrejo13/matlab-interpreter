@@ -19,12 +19,12 @@ areaCircle = PI * r * r;    % area of the circle
 % Volumes
 
 % Cube
-l = 2.5; 					% side lenght
+l = 2.5; 					% side length
 volCube = l * l * l; 		% volume of the cube
 
-% Shpere
+% Sphere
 r = 9;						% radius of the sphere
-volSphere = 4/3*PI*r*r*r;   % volume of the shpere
+volSphere = 4/3*PI*r*r*r;   % volume of the sphere
 
 
 
