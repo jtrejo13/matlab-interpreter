@@ -14,8 +14,8 @@ Github:    https://github.com/jtrejo13
 # -------
 
 from unittest import main, TestCase
-from Scanner import Token, Scanner, INTEGER, PLUS
 from io import StringIO
+from Scanner import Token, Scanner, INTEGER, PLUS
 from Parser import *
 from Interpreter import *
 
@@ -226,6 +226,7 @@ class TestInterpreter(TestCase):
         scanner = Scanner('res = 14 + 2 * 3 - 6 / 2 + 10;')
         parser = Parser(scanner)
         interp = Interpreter(parser)
+        interp.GLOBAL_SCOPE = {}
         interp.interpret()
         result = {'res': 27}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
@@ -235,6 +236,7 @@ class TestInterpreter(TestCase):
             'res = 8 + 3 * (10 / (12 / (3 + 1) - 1)) * ( 10 * 5) - 5;')
         parser = Parser(scanner)
         interp = Interpreter(parser)
+        interp.GLOBAL_SCOPE = {}
         interp.interpret()
         result = {'res': 753}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
@@ -247,6 +249,7 @@ class TestInterpreter(TestCase):
         scanner = Scanner(script)
         parser = Parser(scanner)
         interp = Interpreter(parser)
+        interp.GLOBAL_SCOPE = {}
         interp.interpret()
         result = {'a': -1, 'x': 5, 'y': 8, 'res': 753}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
@@ -256,6 +259,7 @@ class TestInterpreter(TestCase):
         scanner = Scanner(script)
         parser = Parser(scanner)
         interp = Interpreter(parser)
+        interp.GLOBAL_SCOPE = {}
         interp.interpret()
         result = {}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
@@ -265,6 +269,7 @@ class TestInterpreter(TestCase):
         scanner = Scanner(script)
         parser = Parser(scanner)
         interp = Interpreter(parser)
+        interp.GLOBAL_SCOPE = {}
         interp.interpret()
         result = {'x': 5}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
@@ -279,6 +284,7 @@ class TestInterpreter(TestCase):
         scanner = Scanner(script)
         parser = Parser(scanner)
         interp = Interpreter(parser)
+        interp.GLOBAL_SCOPE = {}
         interp.interpret()
         result = {'a': -1, 'x': 5, 'y': 8, 'res': 753}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
@@ -287,6 +293,7 @@ class TestInterpreter(TestCase):
         scanner = Scanner('x = 1.53;')
         parser = Parser(scanner)
         interp = Interpreter(parser)
+        interp.GLOBAL_SCOPE = {}
         interp.interpret()
         result = {'x': 1.53}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
@@ -295,6 +302,7 @@ class TestInterpreter(TestCase):
         scanner = Scanner('res = 14.75 + 2 * 3 - 6 / 2.5 + 10.5;')
         parser = Parser(scanner)
         interp = Interpreter(parser)
+        interp.GLOBAL_SCOPE = {}
         interp.interpret()
         result = {'res': 28.85}
         self.assertEqual(result, interp.GLOBAL_SCOPE)
@@ -308,6 +316,7 @@ class TestInterpreter(TestCase):
         scanner = Scanner(script)
         parser = Parser(scanner)
         interp = Interpreter(parser)
+        interp.GLOBAL_SCOPE = {}
         interp.interpret()
         result = {'radius': 2.5, 'PI': 3.14159, 'area': 19.6349375}
         self.assertEqual(result, interp.GLOBAL_SCOPE)

@@ -58,9 +58,10 @@ class Interpreter(NodeVisitor):
         variables in script
     """
 
+    GLOBAL_SCOPE = {}   # variable_name : value
+
     def __init__(self, parser):
         self.parser = parser
-        self.GLOBAL_SCOPE = {}   # variable_name : value
 
     def interpret(self):
         """Interprets the passed AST"""
