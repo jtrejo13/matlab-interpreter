@@ -368,5 +368,5 @@ def main(shouldDisplayGUI=True):
 
 
 if __name__ == '__main__':
-    answer = query_yes_no("Would you like to launch a GUI?\n('n' launches the interpreter in the console")
+    answer = query_yes_no("Would you like to launch a GUI?\n('n' launches the interpreter in the console)")
     main(answer)
