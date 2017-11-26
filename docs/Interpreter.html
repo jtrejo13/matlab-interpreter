@@ -51,7 +51,7 @@ Args:<br>
 Attributes:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;parser(Parser):&nbsp;The&nbsp;parser&nbsp;constructed&nbsp;with&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;input&nbsp;to&nbsp;be&nbsp;interpreted<br>
-&nbsp;&nbsp;&nbsp;&nbsp;GLOBAL_SCOPE(dict&nbsp;key:str&nbsp;value:float&nbsp;or&nbsp;int)&nbsp;Scope&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Interpreter-GLOBAL_SCOPE">GLOBAL_SCOPE</a>(dict&nbsp;key:str&nbsp;value:float&nbsp;or&nbsp;int)&nbsp;Scope&nbsp;of<br>
 &nbsp;&nbsp;&nbsp;&nbsp;variables&nbsp;in&nbsp;script<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -105,6 +105,10 @@ Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;NameError&nbsp;exception&nbsp;if&nbsp;identifier&nbsp;reached&nbsp;has<br>
 &nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;been&nbsp;declared&nbsp;earlier&nbsp;in&nbsp;the&nbsp;tree&nbsp;(i.e&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;in&nbsp;GLOBAL_SCOPE)</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>GLOBAL_SCOPE</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="Interpreter.html#NodeVisitor">NodeVisitor</a>:<br>
