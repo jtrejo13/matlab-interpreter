@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/jtrejo13/matlab-interpreter.svg?branch=master)](https://travis-ci.org/jtrejo13/matlab-interpreter)
 [![Codecov](https://img.shields.io/codecov/c/github/jtrejo13/matlab-interpreter.svg)](https://codecov.io/gh/jtrejo13/matlab-interpreter)
 
-# MATLAB interpreter
+# MATLAB Interpreter
 
 A (simplified) MATLAB language interpreter. 
 
@@ -46,9 +46,9 @@ PI=3.14
 circle_area=7.065
 ```
 
-### Ongoing and Future Work
+### TODO Work
 
-* Building a simple UI using wxPython - **DONE**
+* ~~Building a simple UI using wxPython~~ - **DONE**
 
 * Adding basic function support:
   - Trigonometry: cos, sin, tan
@@ -114,10 +114,22 @@ $ docker run -it -v my_project_folder_full_path:/usr/user_name -w /usr/user_name
 
 ## Running the Interpreter
 
-To excecute the MATLAB Interpreter: 
+There are two ways to execute the interpreter:
+
+### Command-line Interface
+
+The interpreter can be launched in a command-line interface either on a stand alone GUI, or the terminal 
 
 ```bash
 $ python3 app.py
+```
+
+### Running a script
+
+A '.m' script can also be evaluated by the interpreter. For instance, the example script [RunInterpreter.in](https://github.com/jtrejo13/matlab-interpreter/blob/master/RunInterpreter.in) would be executed as follows:
+
+```bash
+$ python3 RunInterpreter.py < RunInterpreter.in
 ```
 
 ## Tools
