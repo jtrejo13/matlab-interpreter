@@ -37,20 +37,20 @@ radius = 1.5      % the radius
 PI     = 3.14     % pi constant
 
 % area of the circle
-area   = PI * (radius * radius)
+circle_area  = PI * (radius * radius)
 ```
 #### Example Output
 ```matlab
 radius=1.5
 PI=3.14
-area=7.065
+circle_area=7.065
 ```
 
 ### Ongoing and Future Work
 
-* Building a simple UI with wxPython
+* Building a simple UI using wxPython - **DONE**
 
-* Basic function support:
+* Adding basic function support:
   - Trigonometry: cos, sin, tan
   - Arithmetic: power, floor, mod, round, abs
   - Exponents: exp, log, sqrt
@@ -122,7 +122,7 @@ $ python3 app.py
 
 ## Tools
 
-This project uses the following software development tools:
+This project uses the following Python software development tools:
 
 * [Python 3](https://docs.python.org/3/) - The programming language
 * [Make](https://www.gnu.org/software/make/) - Automated builds
@@ -133,11 +133,11 @@ This project uses the following software development tools:
 * [Pydoc](https://docs.python.org/3.4/library/pydoc.html) - Automated documentation
 * [autopep8](https://pypi.python.org/pypi/autopep8) - Automated formatting
 * [TravisCI](https://education.travis-ci.com/) - Continious integration
-
+* [wxPython](https://www.wxpython.org/) - User Interface
 
 ## Versioning
 
-For the versions available, see the [tags on this repository](https://github.com/jtrejo13/matlab-interpreter/releases). 
+For the versions available, see the repository [tags](https://github.com/jtrejo13/matlab-interpreter/releases). 
 
 ## Author
 
@@ -153,3 +153,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgements
 
 * Inspired by [rspivak](https://github.com/rspivak) and his 'Let's Build a Simple Pascal Interpreter' [project](https://github.com/rspivak/lsbasi)
+* The GUI and console 'shell' were based on the following libraries: [wx.py.interpreter.py](https://github.com/wxWidgets/wxPython/blob/master/wx/py/interpreter.py), [wx.py.shell.py](https://github.com/wxWidgets/wxPython/blob/master/wx/py/shell.py), and [code.py](https://svn.python.org/projects/python/trunk/Lib/code.py)
